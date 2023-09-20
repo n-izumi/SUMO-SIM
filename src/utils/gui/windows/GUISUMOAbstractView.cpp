@@ -714,8 +714,10 @@ GUISUMOAbstractView::displayLegend() {
 
     // draw simulation config
     // GLHelper::drawBox(Position(-.99, 0.9 + o2 + oo), z, 0.6, RGBColor::ORANGE, 0, 0.5, 0.5);
+    int seed = OptionsCont::getOptions().getInt("seed");
+    std::string seedStr = "seed: " + toString(seed);
     GLHelper::drawText("scenario: aoume/scenario_1", Position(-.99, 0.9 + o2 + oo), z, _fontHeight, RGBColor::BLACK, 0, FONS_ALIGN_LEFT, _fontWidth, 3);
-    GLHelper::drawText("seed: 1", Position(-.99, 0.85 + o2 + oo), z, _fontHeight, RGBColor::BLACK, 0, FONS_ALIGN_LEFT, _fontWidth, 3);
+    GLHelper::drawText(seedStr, Position(-.99, 0.85 + o2 + oo), z, _fontHeight, RGBColor::BLACK, 0, FONS_ALIGN_LEFT, _fontWidth, 3);
     GLHelper::drawText("construction length: 60m", Position(-.99, 0.8 + o2 + oo), z, _fontHeight, RGBColor::BLACK, 0, FONS_ALIGN_LEFT, _fontWidth, 3);
     GLHelper::drawText("traffic light 1:   blue: 31s, yellow: 3s, red: 68s", Position(-.99, 0.75 + o2 + oo), z, _fontHeight, RGBColor::BLACK, 0, FONS_ALIGN_LEFT, _fontWidth, 3);
     GLHelper::drawText("traffic volume:  straight: 224, regulation: 130", Position(-.99, 0.7 + o2 + oo), z, _fontHeight, RGBColor::BLACK, 0, FONS_ALIGN_LEFT, _fontWidth, 3);
