@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11 -pthread -Wall -pedantic -Wextra -O3 -DNDEBUG   CMakeFiles/testlibtraci.dir/testlibtraci_main.cpp.o  -o ../../../../bin/testlibtraci -Wl,-rpath,/home/traffic/sumo-1.17.0/bin ../../../../bin/libtracicpp.so 

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libforeign_phemlight_V5.a  CMakeFiles/foreign_phemlight_V5.dir/CEP.cpp.o CMakeFiles/foreign_phemlight_V5.dir/CEPHandler.cpp.o CMakeFiles/foreign_phemlight_V5.dir/Constants.cpp.o CMakeFiles/foreign_phemlight_V5.dir/Correction.cpp.o CMakeFiles/foreign_phemlight_V5.dir/Helpers.cpp.o
+/usr/bin/ranlib libforeign_phemlight_V5.a

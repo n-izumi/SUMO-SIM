@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -std=c++11 -pthread -Wall -pedantic -Wextra -O3 -DNDEBUG  -shared  -o ../../../../bin/liblibtracijni.so CMakeFiles/libtracijni.dir/java/libtraciJAVA_wrap.cxx.o -Wl,--whole-archive ../../../../bin/libtracistatic.a ../foreign/tcpip/libforeign_tcpip.a -Wl,--no-whole-archive 

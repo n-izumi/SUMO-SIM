@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnetedit_tools.a  CMakeFiles/netedit_tools.dir/GNEPythonTool.cpp.o CMakeFiles/netedit_tools.dir/GNENetDiffTool.cpp.o CMakeFiles/netedit_tools.dir/GNERunPythonTool.cpp.o CMakeFiles/netedit_tools.dir/GNERunNetgenerate.cpp.o
+/usr/bin/ranlib libnetedit_tools.a
