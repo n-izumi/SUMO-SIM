@@ -52,6 +52,7 @@
 #include <utils/gui/globjects/GUIPointOfInterest.h>
 #include <utils/gui/globjects/GUIPolygon.h>
 #include <utils/gui/windows/GUIDialog_ViewSettings.h>
+#include <utils/gui/windows/GUIDialog_StaticInformation.h>
 #include <utils/geom/GeoConvHelper.h>
 #include <utils/geom/GeomHelper.h>
 #include <utils/gui/settings/GUICompleteSchemeStorage.h>
@@ -705,15 +706,9 @@ GUISUMOAbstractView::displayLegend() {
     // draw simulation config
     const double _fontHeight = 0.2 * 300. / getHeight();
     const double _fontWidth = 0.2 * 300. / getWidth();
-    
-    // sim area
-    // glVertex2d(-.99, 1. + o);
-    // glVertex2d(-.99, 1. + o2);
-    // glEnd();
-    // GLHelper::popMatrix();
 
+    // vollmont
     // draw simulation config
-    // GLHelper::drawBox(Position(-.99, 0.9 + o2 + oo), z, 0.6, RGBColor::ORANGE, 0, 0.5, 0.5);
     int seed = OptionsCont::getOptions().getInt("seed");
     std::string seedStr = "seed: " + toString(seed);
     GLHelper::drawText("scenario: aoume/scenario_1", Position(-.99, 0.9 + o2 + oo), z, _fontHeight, RGBColor::BLACK, 0, FONS_ALIGN_LEFT, _fontWidth, 3);
