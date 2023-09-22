@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC  -std=c++11 -pthread -Wall -pedantic -Wextra -O3 -DNDEBUG  -shared  -o ../../../../tools/libtraci/_libtraci.so CMakeFiles/_libtraci.dir/libtraciPYTHON_wrap.cxx.o -Wl,--whole-archive ../../../../bin/libtracistatic.a ../foreign/tcpip/libforeign_tcpip.a -Wl,--no-whole-archive 
