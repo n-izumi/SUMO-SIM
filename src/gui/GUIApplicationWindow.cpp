@@ -742,17 +742,17 @@ GUIApplicationWindow::buildToolBars() {
         mySimDelaySpinner->setRange(0, 10000);
         mySimDelaySpinner->setValue(mySimDelay);
     }
-    // Scale traffic (flows and incrementally loaded vehicles)
-    {
-        myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
-        myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignToolBarRaisedSameTop);
-        new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar8, (TL("Scale Traffic:") + std::string("\t\t") + TL("Scale traffic from flows and vehicles that are loaded incrementally from route files.")).c_str(), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
-        myDemandScaleSpinner = new MFXRealSpinner(myToolBar8, 7, this, MID_DEMAND_SCALE, GUIDesignSpinDial);
-        myDemandScaleSpinner->setIncrement(0.5);
-        myDemandScaleSpinner->setRange(0, 1000);
-        myDemandScaleSpinner->setValue(1);
-    }
+    // // Scale traffic (flows and incrementally loaded vehicles)
+    // {
+    //     myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
+    //     myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignToolBarRaisedSameTop);
+    //     new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+    //     new FXLabel(myToolBar8, (TL("Scale Traffic:") + std::string("\t\t") + TL("Scale traffic from flows and vehicles that are loaded incrementally from route files.")).c_str(), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+    //     myDemandScaleSpinner = new MFXRealSpinner(myToolBar8, 7, this, MID_DEMAND_SCALE, GUIDesignSpinDial);
+    //     myDemandScaleSpinner->setIncrement(0.5);
+    //     myDemandScaleSpinner->setRange(0, 1000);
+    //     myDemandScaleSpinner->setValue(1);
+    // }
     // Views
     {
         myToolBarDrag5 = new FXToolBarShell(this, GUIDesignToolBar);
@@ -766,11 +766,75 @@ GUIApplicationWindow::buildToolBars() {
                              GUIIconSubSys::getIcon(GUIIcon::OSGVIEW), this, MID_NEW_OSGVIEW, GUIDesignButtonToolbar);
 #endif
     }
+    // static info (flows and incrementally loaded vehicles)
+    {
+        // scenario
+        myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignStaticInformationextTop);
+        new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar8, TL("シナリオ: oume/scenario_1"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // seed
+        int seed = OptionsCont::getOptions().getInt("seed");
+        std::string seedStr = "シード: " + toString(seed);
+        myToolBarDrag12 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar12 = new FXToolBar(myTopDock, myToolBarDrag12, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar12, myToolBar12, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar12, TL(seedStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // const length
+        myToolBarDrag13 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar13 = new FXToolBar(myTopDock, myToolBarDrag13, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar13, myToolBar13, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar13, TL("工事帯長さ: 60m"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // straight tls
+        // myToolBarDrag14 = new FXToolBarShell(this, GUIDesignToolBar);
+        // myToolBar14 = new FXToolBar(myTopDock, myToolBarDrag14, GUIDesignToolBarRaisedSameTop);
+        // new FXToolBarGrip(myToolBar14, myToolBar14, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        // new FXLabel(myToolBar14, TL("信号機(ストレート):"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // regulation tls
+        // myToolBarDrag15 = new FXToolBarShell(this, GUIDesignToolBar);
+        // myToolBar15 = new FXToolBar(myTopDock, myToolBarDrag15, GUIDesignToolBarRaisedSameTop);
+        // new FXToolBarGrip(myToolBar15, myToolBar15, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        // new FXLabel(myToolBar15, TL("信号機(規制):"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // branch tls
+        myToolBarDrag16 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar16 = new FXToolBar(myTopDock, myToolBarDrag16, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar16, myToolBar16, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar16, TL("信号機(枝道): 青 31秒, 黄 3秒, 赤 68秒"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // straight traffic volume
+        myToolBarDrag17 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar17 = new FXToolBar(myTopDock, myToolBarDrag17, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar17, myToolBar17, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar17, TL("交通量(ストレート): 224台"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // regulation traffic volume
+        myToolBarDrag18 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar18 = new FXToolBar(myTopDock, myToolBarDrag18, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar18, myToolBar18, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar18, TL("交通量(規制): 130台"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // passing each ather time
+        myToolBarDrag19 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar19 = new FXToolBar(myTopDock, myToolBarDrag19, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar19, myToolBar19, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar19, TL("すれ違い発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // collision time
+        myToolBarDrag20 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar20 = new FXToolBar(myTopDock, myToolBarDrag20, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar20, myToolBar20, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar20, TL("衝突発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+    }
     /// game specific stuff
     {
         // total waitingTime
         myToolBarDrag6 = new FXToolBarShell(this, GUIDesignToolBar);
-        myToolBar6 = new FXToolBar(myTopDock, myToolBarDrag6, GUIDesignToolBarRaisedSameTop);
+        myToolBar6 = new FXToolBar(myTopDock, myToolBarDrag6, GUIDesignStaticInformationextTop);
         new FXToolBarGrip(myToolBar6, myToolBar6, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
         new FXLabel(myToolBar6, (TL("Waiting Time:") + std::string("\t\t") + TL("Time spent waiting accumulated for all vehicles")).c_str(), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
         myWaitingTimeLabel = new MFXLCDLabel(myToolBar6, myStaticTooltipMenu, 13, nullptr, 0, JUSTIFY_RIGHT);
@@ -1437,9 +1501,9 @@ GUIApplicationWindow::onCmdDelayToggle(FXObject*, FXSelector, void*) {
 
 long
 GUIApplicationWindow::onCmdDemandScale(FXObject*, FXSelector, void*) {
-    if (myRunThread->simulationAvailable()) {
-        myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
-    }
+    // if (myRunThread->simulationAvailable()) {
+    //     myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
+    // }
     return 1;
 }
 
@@ -1562,6 +1626,15 @@ GUIApplicationWindow::onCmdGaming(FXObject*, FXSelector, void*) {
         myToolBar5->hide();
         myToolBar6->show();
         myToolBar8->hide();
+        myToolBar12->hide();
+        myToolBar13->hide();
+        myToolBar14->hide();
+        myToolBar15->hide();
+        myToolBar16->hide();
+        myToolBar17->hide();
+        myToolBar18->hide();
+        myToolBar19->hide();
+        myToolBar20->hide();
         myToolBar10->show();
         if (myTLSGame) {
             myToolBar7->show();
@@ -1587,6 +1660,15 @@ GUIApplicationWindow::onCmdGaming(FXObject*, FXSelector, void*) {
         myToolBar8->show();
         myToolBar9->hide();
         myToolBar10->hide();
+        myToolBar12->show();
+        myToolBar13->show();
+        myToolBar14->show();
+        myToolBar15->show();
+        myToolBar16->show();
+        myToolBar17->show();
+        myToolBar18->show();
+        myToolBar19->show();
+        myToolBar20->show();
         myMessageWindow->show();
         myLCDLabel->setFgColor(MFXUtils::getFXColor(RGBColor::GREEN));
     }
@@ -1654,6 +1736,15 @@ GUIApplicationWindow::onCmdFullScreen(FXObject*, FXSelector, void*) {
         myToolBar6->hide();
         myToolBar7->hide();
         myToolBar8->hide();
+        myToolBar12->hide();
+        myToolBar13->hide();
+        myToolBar14->hide();
+        myToolBar15->hide();
+        myToolBar16->hide();
+        myToolBar17->hide();
+        myToolBar18->hide();
+        myToolBar19->hide();
+        myToolBar20->hide();
         myMessageWindow->hide();
         if (myMDIClient->numChildren() > 0) {
             GUISUMOViewParent* w = dynamic_cast<GUISUMOViewParent*>(myMDIClient->getActiveChild());
@@ -1948,10 +2039,10 @@ GUIApplicationWindow::handleEvent_SimulationLoaded(GUIEvent* e) {
                 (*it)->setText("-");
             }
             // initialize scale from options unless already set in the UI
-            if (myDemandScaleSpinner->getValue() == 1 || !OptionsCont::getOptions().isDefault("scale")) {
-                myDemandScaleSpinner->setValue(OptionsCont::getOptions().getFloat("scale"));
-            }
-            myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
+            // if (myDemandScaleSpinner->getValue() == 1 || !OptionsCont::getOptions().isDefault("scale")) {
+            //     myDemandScaleSpinner->setValue(OptionsCont::getOptions().getFloat("scale"));
+            // }
+            // myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
         }
     }
     getApp()->endWaitCursor();

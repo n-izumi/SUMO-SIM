@@ -424,7 +424,16 @@ protected:
                        *myToolBarDrag4 = nullptr,
                         *myToolBarDrag5 = nullptr,
                          *myMenuBarDrag = nullptr,
-                          *myToolBarDrag8 = nullptr;
+                          *myToolBarDrag8 = nullptr,
+                           *myToolBarDrag12 = nullptr,
+                            *myToolBarDrag13 = nullptr,
+                             *myToolBarDrag14 = nullptr,
+                              *myToolBarDrag15 = nullptr,
+                               *myToolBarDrag16 = nullptr,
+                                *myToolBarDrag17 = nullptr,
+                                 *myToolBarDrag18 = nullptr,
+                                  *myToolBarDrag19 = nullptr,
+                                   *myToolBarDrag20 = nullptr;
 
     /// @brief the simulation delay in milliseconds
     double mySimDelay = 0.;
@@ -460,7 +469,16 @@ protected:
                  *myToolBar3 = nullptr,
                   *myToolBar4 = nullptr,
                    *myToolBar5 = nullptr,
-                    *myToolBar8 = nullptr;
+                    *myToolBar8 = nullptr,
+                     *myToolBar12 = nullptr,
+                      *myToolBar13 = nullptr,
+                       *myToolBar14 = nullptr,
+                        *myToolBar15 = nullptr,
+                         *myToolBar16 = nullptr,
+                          *myToolBar17 = nullptr,
+                           *myToolBar18 = nullptr,
+                            *myToolBar19 = nullptr,
+                             *myToolBar20 = nullptr;
 
     /// @brief the simulation step display
     MFXLCDLabel* myLCDLabel = nullptr;

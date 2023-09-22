@@ -434,6 +434,9 @@ class MFXMenuCheckIcon;
 /// @brief design for first toolbar shell positioned in the next-top position of dock
 #define GUIDesignToolBarRaisedNextTop       (LAYOUT_DOCK_NEXT | LAYOUT_SIDE_TOP | FRAME_RAISED)
 
+/// @brief design for first toolbar shell positioned in the next-top position of dock
+#define GUIDesignStaticInformationextTop       (LAYOUT_DOCK_NEXT | LAYOUT_SIDE_TOP | FRAME_RAISED)
+
 /// @brief design for first toolbar shell positioned in the same  position of dock
 #define GUIDesignToolBarRaisedSameTop       (LAYOUT_DOCK_SAME | LAYOUT_SIDE_TOP | FRAME_RAISED)
 
