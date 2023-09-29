@@ -1,2 +1,0 @@
-/usr/bin/ar qc libnetedit_dialogs_tools.a  CMakeFiles/netedit_dialogs_tools.dir/GNEPythonToolDialog.cpp.o CMakeFiles/netedit_dialogs_tools.dir/GNEPythonToolDialogElements.cpp.o CMakeFiles/netedit_dialogs_tools.dir/GNERunPythonToolDialog.cpp.o CMakeFiles/netedit_dialogs_tools.dir/GNENetgenerateDialog.cpp.o CMakeFiles/netedit_dialogs_tools.dir/GNERunNetgenerateDialog.cpp.o
-/usr/bin/ranlib libnetedit_dialogs_tools.a
