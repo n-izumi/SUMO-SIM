@@ -769,10 +769,11 @@ GUIApplicationWindow::buildToolBars() {
     // static info (flows and incrementally loaded vehicles)
     {
         // scenario
+        std::string scenarioStr = "シナリオ: " + OptionsCont::getOptions().getString("scenario-name");
         myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
         myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignStaticInformationextTop);
         new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar8, TL("シナリオ: oume/scenario_1"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        new FXLabel(myToolBar8, TL(scenarioStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
 
         // seed
         int seed = OptionsCont::getOptions().getInt("seed");
@@ -783,40 +784,49 @@ GUIApplicationWindow::buildToolBars() {
         new FXLabel(myToolBar12, TL(seedStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
 
         // const length
+        std::string zoneLengthStr = "工事帯長さ: " + OptionsCont::getOptions().getString("construction-length");
         myToolBarDrag13 = new FXToolBarShell(this, GUIDesignToolBar);
         myToolBar13 = new FXToolBar(myTopDock, myToolBarDrag13, GUIDesignToolBarRaisedSameTop);
         new FXToolBarGrip(myToolBar13, myToolBar13, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar13, TL("工事帯長さ: 60m"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        new FXLabel(myToolBar13, TL(zoneLengthStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
 
         // straight tls
-        // myToolBarDrag14 = new FXToolBarShell(this, GUIDesignToolBar);
-        // myToolBar14 = new FXToolBar(myTopDock, myToolBarDrag14, GUIDesignToolBarRaisedSameTop);
-        // new FXToolBarGrip(myToolBar14, myToolBar14, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        // new FXLabel(myToolBar14, TL("信号機(ストレート):"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
-
+        if (OptionsCont::getOptions().getString("straight-tls-green") != "") {
+            std::string straightTlsStr = "信号機(ストレート): 青 " + OptionsCont::getOptions().getString("straight-tls-green") + "秒, 黄 " + OptionsCont::getOptions().getString("straight-tls-yellow") + "秒, 赤 " + OptionsCont::getOptions().getString("straight-tls-red") + "秒";
+            myToolBarDrag14 = new FXToolBarShell(this, GUIDesignToolBar);
+            myToolBar14 = new FXToolBar(myTopDock, myToolBarDrag14, GUIDesignToolBarRaisedSameTop);
+            new FXToolBarGrip(myToolBar14, myToolBar14, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+            new FXLabel(myToolBar14, TL(straightTlsStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        }
         // regulation tls
-        // myToolBarDrag15 = new FXToolBarShell(this, GUIDesignToolBar);
-        // myToolBar15 = new FXToolBar(myTopDock, myToolBarDrag15, GUIDesignToolBarRaisedSameTop);
-        // new FXToolBarGrip(myToolBar15, myToolBar15, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        // new FXLabel(myToolBar15, TL("信号機(規制):"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
-
+        if (OptionsCont::getOptions().getString("regulation-tls-green") != "") {
+            std::string regulationTlsStr = "信号機(規制): 青 " + OptionsCont::getOptions().getString("regulation-tls-green") + "秒, 黄 " + OptionsCont::getOptions().getString("regulation-tls-yellow") + "秒, 赤 " + OptionsCont::getOptions().getString("regulation-tls-red") + "秒";
+            myToolBarDrag15 = new FXToolBarShell(this, GUIDesignToolBar);
+            myToolBar15 = new FXToolBar(myTopDock, myToolBarDrag15, GUIDesignToolBarRaisedSameTop);
+            new FXToolBarGrip(myToolBar15, myToolBar15, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+            new FXLabel(myToolBar15, TL(regulationTlsStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        }
         // branch tls
-        myToolBarDrag16 = new FXToolBarShell(this, GUIDesignToolBar);
-        myToolBar16 = new FXToolBar(myTopDock, myToolBarDrag16, GUIDesignToolBarRaisedSameTop);
-        new FXToolBarGrip(myToolBar16, myToolBar16, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar16, TL("信号機(枝道): 青 31秒, 黄 3秒, 赤 68秒"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
-
+        if (OptionsCont::getOptions().getString("branch-tls-green") != "") {
+            std::string branchTlsStr = "信号機(枝道): 青 " + OptionsCont::getOptions().getString("branch-tls-green") + "秒, 黄 " + OptionsCont::getOptions().getString("branch-tls-yellow") + "秒, 赤 " + OptionsCont::getOptions().getString("branch-tls-red") + "秒";
+            myToolBarDrag16 = new FXToolBarShell(this, GUIDesignToolBar);
+            myToolBar16 = new FXToolBar(myTopDock, myToolBarDrag16, GUIDesignToolBarRaisedSameTop);
+            new FXToolBarGrip(myToolBar16, myToolBar16, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+            new FXLabel(myToolBar16, TL(branchTlsStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        }
         // straight traffic volume
+        std::string straightTrafficStr = "交通量(ストレート): " + OptionsCont::getOptions().getString("straight-traffic-volume") + "台";
         myToolBarDrag17 = new FXToolBarShell(this, GUIDesignToolBar);
         myToolBar17 = new FXToolBar(myTopDock, myToolBarDrag17, GUIDesignToolBarRaisedSameTop);
         new FXToolBarGrip(myToolBar17, myToolBar17, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar17, TL("交通量(ストレート): 224台"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        new FXLabel(myToolBar17, TL(straightTrafficStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
 
         // regulation traffic volume
+        std::string regulationTrafficStr = "交通量(規制): " + OptionsCont::getOptions().getString("regulation-traffic-volume") + "台";
         myToolBarDrag18 = new FXToolBarShell(this, GUIDesignToolBar);
         myToolBar18 = new FXToolBar(myTopDock, myToolBarDrag18, GUIDesignToolBarRaisedSameTop);
         new FXToolBarGrip(myToolBar18, myToolBar18, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar18, TL("交通量(規制): 130台"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        new FXLabel(myToolBar18, TL(regulationTrafficStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
 
         // passing each ather time
         myToolBarDrag19 = new FXToolBarShell(this, GUIDesignToolBar);
@@ -2516,6 +2526,43 @@ GUIApplicationWindow::setBreakpoints(const std::vector<SUMOTime>& breakpoints) {
         updateChildren(MID_TIMELINK_BREAKPOINT);
     }
 }
+
+void
+GUIApplicationWindow::setStaticInfo(const std::string& key, const std::string& value) {
+    // シナリオ名
+    if (key == "scenario") {
+        scenarioName = value;
+    }
+    // 工事帯長さ
+    else if (key == "length") {
+        zoneLength = value;
+    }
+    // 信号機
+    else if (key == "straightSignal") {
+        straightSignal = value;
+    }
+    else if (key == "regulationSignal") {
+        regulationSignal = value;
+    }
+    else if (key == "branchSignal") {
+        branchSignal = value;
+    }
+    // 交通量
+    else if (key == "straightVolume") {
+        straightVolume = value;
+    }
+    else if (key == "regulationVolume") {
+        regulationVolume = value;
+    }
+    // すれ違い
+    else if (key == "passingEachAtherTime") {
+        passingEachAtherTime = value;
+    }
+    // 衝突
+    else if (key == "collisionTime") {
+        collisionTime = value;
+    }
+}  // NOSONAR
 
 
 const std::vector<SUMOTime>

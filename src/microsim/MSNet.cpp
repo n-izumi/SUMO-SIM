@@ -860,38 +860,43 @@ MSNet::postMoveStep() {
     }
     myStep += DELTA_T;
 
-    // // 現在のシステム時間を取得
-    // struct timeval tv;
-    // gettimeofday(&tv, NULL);
+    // vollmont
+    if (OptionsCont::getOptions().getFloat("simulation-speed") > 1.0)
+    {
+        // 現在のシステム時間を取得
+        struct timeval tv;
+        gettimeofday(&tv, NULL);
 
-    // // 加速時間計算
-    // double multiplier = (double) (1000 - 500) / 1000;
-    // long diffMsec = DELTA_T * multiplier; // 1000 = 0 , 500 = 100 , 100 = 180
+        // 加速時間計算
+        int speed = 1000 / OptionsCont::getOptions().getFloat("simulation-speed");
+        double multiplier = (double) (1000 - speed) / 1000;
+        long diffMsec = DELTA_T * multiplier; // 1000 = 0 , 500 = 100 , 100 = 180
 
-    // // ミリ秒単位で進める時間を指定
-    // long usecTmp = tv.tv_usec + ((diffMsec % MSEC_PER_SEC) * MSEC_PER_SEC);
-    // tv.tv_usec = (usecTmp % USEC_PER_SEC);
-    // tv.tv_sec = tv.tv_sec + (usecTmp / USEC_PER_SEC);
+        // ミリ秒単位で進める時間を指定
+        long usecTmp = tv.tv_usec + ((diffMsec % MSEC_PER_SEC) * MSEC_PER_SEC);
+        tv.tv_usec = (usecTmp % USEC_PER_SEC);
+        tv.tv_sec = tv.tv_sec + (usecTmp / USEC_PER_SEC);
 
-    // システム時間を進める
-    // int rtn = settimeofday(&tv, NULL);
-    // if (rtn != 0)
-    // {
-    //     // 時刻設定異常
-    //     std::cout 
-    //         // << "Time:" << _time 
-    //         << "  settimeofday error. return:" << rtn 
-    //         // << "  Diff msec:" << diffMsec
-    //         // << "  Real Date:[" << realDateStr() << "]"
-    //         << std::endl;
-    // }
-    // else
-    // {
-    //     std::cout << "システム時刻を変更しました。" << std::endl;
-    //     // result = true;
-    // }
-    // std::cout << DELTA_T << std::endl;
-    // std::cout << myApp->getDelay() << std::endl;
+        // システム時間を進める
+        int rtn = settimeofday(&tv, NULL);
+        if (rtn != 0)
+        {
+            // 時刻設定異常
+            std::cout 
+                // << "Time:" << _time 
+                << "  settimeofday error. return:" << rtn 
+                // << "  Diff msec:" << diffMsec
+                // << "  Real Date:[" << realDateStr() << "]"
+                << std::endl;
+        }
+        else
+        {
+            std::cout << "システム時刻を変更しました。" << std::endl;
+            // result = true;
+        }
+        // std::cout << DELTA_T << std::endl;
+        // std::cout << myApp->getDelay() << std::endl;
+    }
 }
 
 

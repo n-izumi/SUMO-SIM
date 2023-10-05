@@ -333,6 +333,9 @@ public:
     /// @brief Sets the breakpoints of the parent application
     virtual void setBreakpoints(const std::vector<SUMOTime>& breakpoints);
 
+    /// @brief Sets the breakpoints of the parent application
+    virtual void setStaticInfo(const std::string& key, const std::string& value);
+
     /// @brief Sends an event from the application thread to the GUI and waits until it is handled
     virtual void sendBlockingEvent(GUIEvent* event);
 
@@ -588,6 +591,17 @@ protected:
 
     /// @brief breakpoint dialog
     GUIDialog_Breakpoints* myBreakpointDialog = nullptr;
+
+    /// 静的情報
+    std::string scenarioName;
+    std::string zoneLength;
+    std::string straightSignal;
+    std::string regulationSignal;
+    std::string branchSignal;
+    std::string straightVolume;
+    std::string regulationVolume;
+    std::string passingEachAtherTime;
+    std::string collisionTime;
 
 private:
     /// @brief starts to load a simulation

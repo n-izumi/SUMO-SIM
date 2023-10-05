@@ -178,6 +178,11 @@ GUI::removeView(const std::string& viewID) {
     // sonar thinks here is a memory leak but the GUIApplicationWindow does the clean up
 }  // NOSONAR
 
+void
+GUI::setStaticInfo(const std::string& key, const std::string& value) {
+    
+}  // NOSONAR
+
 
 void
 GUI::setBoundary(const std::string& viewID, double xmin, double ymin, double xmax, double ymax) {

@@ -550,6 +550,49 @@ MSFrame::fillOptions() {
     oc.doRegister("ride.stop-tolerance", new Option_Float(10.));
     oc.addDescription("ride.stop-tolerance", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
 
+    // vollmont 
+    oc.doRegister("simulation-speed", new Option_Float(1.0));
+    oc.addDescription("simulation-speed", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+ 
+    oc.doRegister("scenario-name", new Option_String(""));
+    oc.addDescription("scenario-name", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("construction-length", new Option_String("60m"));
+    oc.addDescription("construction-length", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("straight-tls-green", new Option_String(""));
+    oc.addDescription("straight-tls-green", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("straight-tls-yellow", new Option_String(""));
+    oc.addDescription("straight-tls-yellow", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("straight-tls-red", new Option_String(""));
+    oc.addDescription("straight-tls-red", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("regulation-tls-green", new Option_String(""));
+    oc.addDescription("regulation-tls-green", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("regulation-tls-yellow", new Option_String(""));
+    oc.addDescription("regulation-tls-yellow", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("regulation-tls-red", new Option_String(""));
+    oc.addDescription("regulation-tls-red", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("branch-tls-green", new Option_String(""));
+    oc.addDescription("branch-tls-green", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("branch-tls-yellow", new Option_String(""));
+    oc.addDescription("branch-tls-yellow", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("branch-tls-red", new Option_String(""));
+    oc.addDescription("branch-tls-red", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("straight-traffic-volume", new Option_String(""));
+    oc.addDescription("straight-traffic-volume", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
+    oc.doRegister("regulation-traffic-volume", new Option_String(""));
+    oc.addDescription("regulation-traffic-volume", "Processing", TL("Tolerance to apply when matching pedestrian and vehicle positions on boarding at individual stops"));
+
     // generic routing options
     oc.doRegister("routing-algorithm", new Option_String("dijkstra"));
     oc.addDescription("routing-algorithm", "Routing",
