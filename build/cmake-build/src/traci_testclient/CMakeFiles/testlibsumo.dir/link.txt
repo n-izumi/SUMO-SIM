@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11 -pthread -Wall -pedantic -Wextra -O3 -DNDEBUG   CMakeFiles/testlibsumo.dir/testlibsumo_main.cpp.o  -o ../../../../bin/testlibsumo -Wl,-rpath,/home/traffic/sumo-1.17.0/bin ../../../../bin/libsumocpp.so /usr/lib/x86_64-linux-gnu/libxerces-c.so /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/x86_64-linux-gnu/libproj.so 

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libutils_handlers.a  CMakeFiles/utils_handlers.dir/AdditionalHandler.cpp.o CMakeFiles/utils_handlers.dir/DataHandler.cpp.o CMakeFiles/utils_handlers.dir/GeneralHandler.cpp.o CMakeFiles/utils_handlers.dir/RouteHandler.cpp.o CMakeFiles/utils_handlers.dir/MeanDataHandler.cpp.o CMakeFiles/utils_handlers.dir/TemplateHandler.cpp.o
-/usr/bin/ranlib libutils_handlers.a
