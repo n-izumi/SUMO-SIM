@@ -843,6 +843,11 @@ Simulation::setScale(double value) {
 }
 
 void
+Simulation::setStaticInfo(const std::string& key, const std::string& value) {
+    // MSNet::getInstance()->getVehicleControl().setScale(value);
+}
+
+void
 Simulation::clearPending(const std::string& routeID) {
     MSNet::getInstance()->getInsertionControl().clearPendingVehicles(routeID);
 }

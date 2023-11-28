@@ -145,6 +145,14 @@ class GuiDomain(Domain):
         """
         return self._getUniversal(tc.VAR_HAS_VIEW, viewID)
 
+    def setStaticInfo(self, key, value):
+        """hasView(string): -> bool
+
+        Check whether the given view exists.
+        """
+        return self._getUniversal(tc.VAR_SET_STATIC_INFO, key, "s", value)
+        # return self._getUniversal(tc.VAR_HAS_VIEW, viewID)
+
     def getTrackedVehicle(self, viewID=DEFAULT_VIEW):
         """getTrackedVehicle(string): -> string
 

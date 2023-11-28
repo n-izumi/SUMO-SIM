@@ -178,6 +178,15 @@ GUI::removeView(const std::string& viewID) {
     // sonar thinks here is a memory leak but the GUIApplicationWindow does the clean up
 }  // NOSONAR
 
+int
+GUI::setStaticInfo(const std::string& key, const std::string& value) {
+    GUIApplicationWindow* aw = static_cast<GUIApplicationWindow*>(GUIMainWindow::getInstance());
+    if (myWindow == nullptr) {
+        aw->setStaticInfo(key, value);
+    }
+    return 0;
+}  // NOSONAR
+
 
 void
 GUI::setBoundary(const std::string& viewID, double xmin, double ymin, double xmax, double ymax) {
@@ -413,7 +422,7 @@ GUI::makeWrapper() {
 
 
 bool
-GUI::handleVariable(const std::string& objID, const int variable, VariableWrapper* wrapper, tcpip::Storage* /* paramData */) {
+GUI::handleVariable(const std::string& objID, const int variable, VariableWrapper* wrapper, tcpip::Storage* paramData) {
     switch (variable) {
         case TRACI_ID_LIST:
             return wrapper->wrapStringList(objID, variable, getIDList());
@@ -433,6 +442,9 @@ GUI::handleVariable(const std::string& objID, const int variable, VariableWrappe
             return wrapper->wrapInt(objID, variable, hasView(objID) ? 1 : 0);
         case VAR_TRACK_VEHICLE:
             return wrapper->wrapString(objID, variable, getTrackedVehicle(objID));
+        case VAR_SET_STATIC_INFO:
+            paramData->readUnsignedByte();
+            return wrapper->wrapInt(objID, variable, setStaticInfo(objID, paramData->readString()));
         default:
             return false;
     }

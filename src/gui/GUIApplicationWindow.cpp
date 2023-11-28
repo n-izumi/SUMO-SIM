@@ -742,17 +742,17 @@ GUIApplicationWindow::buildToolBars() {
         mySimDelaySpinner->setRange(0, 10000);
         mySimDelaySpinner->setValue(mySimDelay);
     }
-    // Scale traffic (flows and incrementally loaded vehicles)
-    {
-        myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
-        myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignToolBarRaisedSameTop);
-        new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar8, (TL("Scale Traffic:") + std::string("\t\t") + TL("Scale traffic from flows and vehicles that are loaded incrementally from route files.")).c_str(), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
-        myDemandScaleSpinner = new MFXRealSpinner(myToolBar8, 7, this, MID_DEMAND_SCALE, GUIDesignSpinDial);
-        myDemandScaleSpinner->setIncrement(0.5);
-        myDemandScaleSpinner->setRange(0, 1000);
-        myDemandScaleSpinner->setValue(1);
-    }
+    // // Scale traffic (flows and incrementally loaded vehicles)
+    // {
+    //     myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
+    //     myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignToolBarRaisedSameTop);
+    //     new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+    //     new FXLabel(myToolBar8, (TL("Scale Traffic:") + std::string("\t\t") + TL("Scale traffic from flows and vehicles that are loaded incrementally from route files.")).c_str(), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+    //     myDemandScaleSpinner = new MFXRealSpinner(myToolBar8, 7, this, MID_DEMAND_SCALE, GUIDesignSpinDial);
+    //     myDemandScaleSpinner->setIncrement(0.5);
+    //     myDemandScaleSpinner->setRange(0, 1000);
+    //     myDemandScaleSpinner->setValue(1);
+    // }
     // Views
     {
         myToolBarDrag5 = new FXToolBarShell(this, GUIDesignToolBar);
@@ -766,11 +766,117 @@ GUIApplicationWindow::buildToolBars() {
                              GUIIconSubSys::getIcon(GUIIcon::OSGVIEW), this, MID_NEW_OSGVIEW, GUIDesignButtonToolbar);
 #endif
     }
+    // static info (flows and incrementally loaded vehicles)
+    {
+        // scenario
+        std::string scenarioStr = "シナリオ: " + OptionsCont::getOptions().getString("scenario-name");
+        myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBarDrag8->setHiliteColor(MFXUtils::getFXColor(RGBColor::RED));
+        myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignStaticInformationextTop);
+        new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar8, TL(scenarioStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // seed
+        int seed = OptionsCont::getOptions().getInt("seed");
+        std::string seedStr = "シード: " + toString(seed);
+        myToolBarDrag12 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar12 = new FXToolBar(myTopDock, myToolBarDrag12, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar12, myToolBar12, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar12, TL(seedStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // const length
+        std::string zoneLengthStr = "工事帯長さ: " + OptionsCont::getOptions().getString("construction-length");
+        myToolBarDrag13 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar13 = new FXToolBar(myTopDock, myToolBarDrag13, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar13, myToolBar13, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar13, TL(zoneLengthStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // straight tls
+        if (OptionsCont::getOptions().getString("straight-tls-green") != "") {
+            std::string straightTlsStr = "信号機(ストレート): 青 " + OptionsCont::getOptions().getString("straight-tls-green") + "秒, 黄 " + OptionsCont::getOptions().getString("straight-tls-yellow") + "秒, 赤 " + OptionsCont::getOptions().getString("straight-tls-red") + "秒";
+            myToolBarDrag14 = new FXToolBarShell(this, GUIDesignToolBar);
+            myToolBar14 = new FXToolBar(myTopDock, myToolBarDrag14, GUIDesignToolBarRaisedSameTop);
+            new FXToolBarGrip(myToolBar14, myToolBar14, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+            new FXLabel(myToolBar14, TL(straightTlsStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        }
+        // regulation tls
+        if (OptionsCont::getOptions().getString("regulation-tls-green") != "") {
+            std::string regulationTlsStr = "信号機(規制): 青 " + OptionsCont::getOptions().getString("regulation-tls-green") + "秒, 黄 " + OptionsCont::getOptions().getString("regulation-tls-yellow") + "秒, 赤 " + OptionsCont::getOptions().getString("regulation-tls-red") + "秒";
+            myToolBarDrag15 = new FXToolBarShell(this, GUIDesignToolBar);
+            myToolBar15 = new FXToolBar(myTopDock, myToolBarDrag15, GUIDesignToolBarRaisedSameTop);
+            new FXToolBarGrip(myToolBar15, myToolBar15, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+            new FXLabel(myToolBar15, TL(regulationTlsStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        }
+        // branch tls
+        if (OptionsCont::getOptions().getString("branch-tls-green") != "") {
+            std::string branchTlsStr = "信号機(枝道): 青 " + OptionsCont::getOptions().getString("branch-tls-green") + "秒, 黄 " + OptionsCont::getOptions().getString("branch-tls-yellow") + "秒, 赤 " + OptionsCont::getOptions().getString("branch-tls-red") + "秒";
+            myToolBarDrag16 = new FXToolBarShell(this, GUIDesignToolBar);
+            myToolBar16 = new FXToolBar(myTopDock, myToolBarDrag16, GUIDesignToolBarRaisedSameTop);
+            new FXToolBarGrip(myToolBar16, myToolBar16, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+            new FXLabel(myToolBar16, TL(branchTlsStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        }
+        // straight traffic volume
+        std::string straightTrafficStr = "交通量(ストレート): " + OptionsCont::getOptions().getString("straight-traffic-volume") + "台";
+        myToolBarDrag17 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar17 = new FXToolBar(myTopDock, myToolBarDrag17, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar17, myToolBar17, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar17, TL(straightTrafficStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // regulation traffic volume
+        std::string regulationTrafficStr = "交通量(規制): " + OptionsCont::getOptions().getString("regulation-traffic-volume") + "台";
+        myToolBarDrag18 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar18 = new FXToolBar(myTopDock, myToolBarDrag18, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar18, myToolBar18, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new FXLabel(myToolBar18, TL(regulationTrafficStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        // passing each ather time
+        // myToolBarDrag19 = new FXToolBarShell(this, GUIDesignToolBar);
+        // myToolBar19 = new FXToolBar(myTopDock, myToolBarDrag19, GUIDesignToolBarRaisedSameTop);
+        // new FXToolBarGrip(myToolBar19, myToolBar19, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        // new FXLabel(myToolBar19, TL("タイムアウト発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
+        myToolBarDrag19 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar19 = new FXToolBar(myTopDock, myToolBarDrag19, GUIDesignStaticInformationextTop);
+        new FXToolBarGrip(myToolBar19, myToolBar19, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new MFXButtonTooltip(myToolBar19, myStaticTooltipMenu, TL("タイムアウト発生時刻:\tToggle between time formats\tToggle between seconds and hour:minute:seconds display."), nullptr, this, MID_TIME_TOGGLE, LAYOUT_TOP | LAYOUT_LEFT);
+
+        myTOTLabel = new MFXLCDLabel(myToolBar19, myStaticTooltipMenu, 16, nullptr, 0, JUSTIFY_RIGHT);
+        myTOTLabel->setHorizontal(2);
+        myTOTLabel->setVertical(6);
+        myTOTLabel->setThickness(2);
+        myTOTLabel->setGroove(2);
+        // myTOTLabel->setText("----------------");
+        // myTOTLabel->setText("11/14 12:00:00");
+        myTOTLabel->setText("----------------");
+        myTOTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::BLACK));
+        myTOTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::WHITE));
+
+        // collision time
+        // myToolBarDrag20 = new FXToolBarShell(this, GUIDesignToolBar);
+        // myToolBar20 = new FXToolBar(myTopDock, myToolBarDrag20, GUIDesignToolBarRaisedSameTop);
+        // new FXToolBarGrip(myToolBar20, myToolBar20, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        // new FXLabel(myToolBar20, TL("衝突発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        myToolBarDrag20 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBar20 = new FXToolBar(myTopDock, myToolBarDrag20, GUIDesignToolBarRaisedSameTop);
+        new FXToolBarGrip(myToolBar20, myToolBar20, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        new MFXButtonTooltip(myToolBar20, myStaticTooltipMenu, TL("衝突発生時刻:\tToggle between time formats\tToggle between seconds and hour:minute:seconds display."), nullptr, this, MID_TIME_TOGGLE, LAYOUT_TOP | LAYOUT_LEFT);
+
+        myCTLabel = new MFXLCDLabel(myToolBar20, myStaticTooltipMenu, 16, nullptr, 0, JUSTIFY_RIGHT);
+        myCTLabel->setHorizontal(2);
+        myCTLabel->setVertical(6);
+        myCTLabel->setThickness(2);
+        myCTLabel->setGroove(2);
+        // myCTLabel->setText("11 14 12-00-00");
+        // myCTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::RED));
+        myCTLabel->setText("----------------");
+        myCTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::WHITE));
+        myCTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::BLACK));
+    }
     /// game specific stuff
     {
         // total waitingTime
         myToolBarDrag6 = new FXToolBarShell(this, GUIDesignToolBar);
-        myToolBar6 = new FXToolBar(myTopDock, myToolBarDrag6, GUIDesignToolBarRaisedSameTop);
+        myToolBar6 = new FXToolBar(myTopDock, myToolBarDrag6, GUIDesignStaticInformationextTop);
         new FXToolBarGrip(myToolBar6, myToolBar6, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
         new FXLabel(myToolBar6, (TL("Waiting Time:") + std::string("\t\t") + TL("Time spent waiting accumulated for all vehicles")).c_str(), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
         myWaitingTimeLabel = new MFXLCDLabel(myToolBar6, myStaticTooltipMenu, 13, nullptr, 0, JUSTIFY_RIGHT);
@@ -1437,9 +1543,9 @@ GUIApplicationWindow::onCmdDelayToggle(FXObject*, FXSelector, void*) {
 
 long
 GUIApplicationWindow::onCmdDemandScale(FXObject*, FXSelector, void*) {
-    if (myRunThread->simulationAvailable()) {
-        myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
-    }
+    // if (myRunThread->simulationAvailable()) {
+    //     myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
+    // }
     return 1;
 }
 
@@ -1562,6 +1668,15 @@ GUIApplicationWindow::onCmdGaming(FXObject*, FXSelector, void*) {
         myToolBar5->hide();
         myToolBar6->show();
         myToolBar8->hide();
+        myToolBar12->hide();
+        myToolBar13->hide();
+        myToolBar14->hide();
+        myToolBar15->hide();
+        myToolBar16->hide();
+        myToolBar17->hide();
+        myToolBar18->hide();
+        myToolBar19->hide();
+        myToolBar20->hide();
         myToolBar10->show();
         if (myTLSGame) {
             myToolBar7->show();
@@ -1587,8 +1702,18 @@ GUIApplicationWindow::onCmdGaming(FXObject*, FXSelector, void*) {
         myToolBar8->show();
         myToolBar9->hide();
         myToolBar10->hide();
+        myToolBar12->show();
+        myToolBar13->show();
+        myToolBar14->show();
+        myToolBar15->show();
+        myToolBar16->show();
+        myToolBar17->show();
+        myToolBar18->show();
+        myToolBar19->show();
+        myToolBar20->show();
         myMessageWindow->show();
         myLCDLabel->setFgColor(MFXUtils::getFXColor(RGBColor::GREEN));
+        myCTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::GREEN));
     }
     if (myMDIClient->numChildren() > 0) {
         GUISUMOViewParent* w = dynamic_cast<GUISUMOViewParent*>(myMDIClient->getActiveChild());
@@ -1654,6 +1779,15 @@ GUIApplicationWindow::onCmdFullScreen(FXObject*, FXSelector, void*) {
         myToolBar6->hide();
         myToolBar7->hide();
         myToolBar8->hide();
+        myToolBar12->hide();
+        myToolBar13->hide();
+        myToolBar14->hide();
+        myToolBar15->hide();
+        myToolBar16->hide();
+        myToolBar17->hide();
+        myToolBar18->hide();
+        myToolBar19->hide();
+        myToolBar20->hide();
         myMessageWindow->hide();
         if (myMDIClient->numChildren() > 0) {
             GUISUMOViewParent* w = dynamic_cast<GUISUMOViewParent*>(myMDIClient->getActiveChild());
@@ -1948,10 +2082,10 @@ GUIApplicationWindow::handleEvent_SimulationLoaded(GUIEvent* e) {
                 (*it)->setText("-");
             }
             // initialize scale from options unless already set in the UI
-            if (myDemandScaleSpinner->getValue() == 1 || !OptionsCont::getOptions().isDefault("scale")) {
-                myDemandScaleSpinner->setValue(OptionsCont::getOptions().getFloat("scale"));
-            }
-            myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
+            // if (myDemandScaleSpinner->getValue() == 1 || !OptionsCont::getOptions().isDefault("scale")) {
+            //     myDemandScaleSpinner->setValue(OptionsCont::getOptions().getFloat("scale"));
+            // }
+            // myRunThread->getNet().getVehicleControl().setScale(myDemandScaleSpinner->getValue());
         }
     }
     getApp()->endWaitCursor();
@@ -2425,6 +2559,51 @@ GUIApplicationWindow::setBreakpoints(const std::vector<SUMOTime>& breakpoints) {
         updateChildren(MID_TIMELINK_BREAKPOINT);
     }
 }
+
+void
+GUIApplicationWindow::setStaticInfo(const std::string& key, const std::string& value) {
+    // シナリオ名
+    if (key == "scenario") {
+        scenarioName = value;
+    }
+    // 工事帯長さ
+    else if (key == "length") {
+        zoneLength = value;
+    }
+    // 信号機
+    else if (key == "straightSignal") {
+        straightSignal = value;
+    }
+    else if (key == "regulationSignal") {
+        regulationSignal = value;
+    }
+    else if (key == "branchSignal") {
+        branchSignal = value;
+    }
+    // 交通量
+    else if (key == "straightVolume") {
+        straightVolume = value;
+    }
+    else if (key == "regulationVolume") {
+        regulationVolume = value;
+    }
+    // タイムアウト
+    else if (key == "timeOutTime") {
+        passingEachAtherTime = value;
+        std::string timeStr = myRunThread->getNet().getCurrentTimeStr();
+        myTOTLabel->setText(timeStr.c_str());
+        myTOTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::RED));
+        // myTOTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::RED));
+    }
+    // 衝突
+    else if (key == "collisionTime") {
+        collisionTime = value;
+        std::string timeStr = myRunThread->getNet().getCurrentTimeStr();
+        myCTLabel->setText(timeStr.c_str());
+        myCTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::RED));
+        // myCTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::RED));
+    }
+}  // NOSONAR
 
 
 const std::vector<SUMOTime>

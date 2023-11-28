@@ -1431,6 +1431,9 @@ TRACI_CONST int VAR_TRACK_VEHICLE = 0xa6;
 // presence of view
 TRACI_CONST int VAR_HAS_VIEW = 0xa7;
 
+// set static info
+TRACI_CONST int VAR_SET_STATIC_INFO = 0xa8;
+
 } // namespace libsumo
 
 #undef TRACI_CONST

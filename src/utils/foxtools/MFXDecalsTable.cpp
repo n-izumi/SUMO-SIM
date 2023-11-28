@@ -28,6 +28,7 @@
 #include <utils/gui/images/GUIIconSubSys.h>
 #include <utils/gui/windows/GUIAppEnum.h>
 #include <utils/gui/windows/GUIDialog_ViewSettings.h>
+#include <utils/gui/windows/GUIDialog_StaticInformation.h>
 
 
 #define EXTRAMARGING 4

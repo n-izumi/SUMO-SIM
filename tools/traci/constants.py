@@ -1412,6 +1412,9 @@ VAR_TRACK_VEHICLE = 0xa6
 #  presence of view
 VAR_HAS_VIEW = 0xa7
 
+#  presence of view
+VAR_SET_STATIC_INFO = 0xa8
+
 # @name currently wanted lane-change action
 # @{
 # @brief No action desired

@@ -333,6 +333,9 @@ public:
     /// @brief Sets the breakpoints of the parent application
     virtual void setBreakpoints(const std::vector<SUMOTime>& breakpoints);
 
+    /// @brief Sets the breakpoints of the parent application
+    virtual void setStaticInfo(const std::string& key, const std::string& value);
+
     /// @brief Sends an event from the application thread to the GUI and waits until it is handled
     virtual void sendBlockingEvent(GUIEvent* event);
 
@@ -424,7 +427,16 @@ protected:
                        *myToolBarDrag4 = nullptr,
                         *myToolBarDrag5 = nullptr,
                          *myMenuBarDrag = nullptr,
-                          *myToolBarDrag8 = nullptr;
+                          *myToolBarDrag8 = nullptr,
+                           *myToolBarDrag12 = nullptr,
+                            *myToolBarDrag13 = nullptr,
+                             *myToolBarDrag14 = nullptr,
+                              *myToolBarDrag15 = nullptr,
+                               *myToolBarDrag16 = nullptr,
+                                *myToolBarDrag17 = nullptr,
+                                 *myToolBarDrag18 = nullptr,
+                                  *myToolBarDrag19 = nullptr,
+                                   *myToolBarDrag20 = nullptr;
 
     /// @brief the simulation delay in milliseconds
     double mySimDelay = 0.;
@@ -460,13 +472,28 @@ protected:
                  *myToolBar3 = nullptr,
                   *myToolBar4 = nullptr,
                    *myToolBar5 = nullptr,
-                    *myToolBar8 = nullptr;
+                    *myToolBar8 = nullptr,
+                     *myToolBar12 = nullptr,
+                      *myToolBar13 = nullptr,
+                       *myToolBar14 = nullptr,
+                        *myToolBar15 = nullptr,
+                         *myToolBar16 = nullptr,
+                          *myToolBar17 = nullptr,
+                           *myToolBar18 = nullptr,
+                            *myToolBar19 = nullptr,
+                             *myToolBar20 = nullptr;
 
     /// @brief the simulation step display
     MFXLCDLabel* myLCDLabel = nullptr;
 
     /// @brief the simulation step display
     MFXLCDLabel* myCTSLabel = nullptr;
+
+    /// @brief the simulation step display
+    MFXLCDLabel* myCTLabel = nullptr;
+
+    /// @brief the simulation step display
+    MFXLCDLabel* myTOTLabel = nullptr;
 
     /// @brief io-event with the load-thread
     FXEX::MFXThreadEvent myLoadThreadEvent;
@@ -570,6 +597,17 @@ protected:
 
     /// @brief breakpoint dialog
     GUIDialog_Breakpoints* myBreakpointDialog = nullptr;
+
+    /// 静的情報
+    std::string scenarioName;
+    std::string zoneLength;
+    std::string straightSignal;
+    std::string regulationSignal;
+    std::string branchSignal;
+    std::string straightVolume;
+    std::string regulationVolume;
+    std::string passingEachAtherTime;
+    std::string collisionTime;
 
 private:
     /// @brief starts to load a simulation

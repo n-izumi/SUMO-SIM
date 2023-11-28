@@ -65,6 +65,7 @@
 #include <utils/gui/settings/GUICompleteSchemeStorage.h>
 #include <utils/gui/windows/GUIDanielPerspectiveChanger.h>
 #include <utils/gui/windows/GUIDialog_ViewSettings.h>
+#include <utils/gui/windows/GUIDialog_StaticInformation.h>
 #include <utils/options/OptionsCont.h>
 
 #include <unordered_set>

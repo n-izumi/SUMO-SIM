@@ -849,7 +849,7 @@ lists which parameter are used by which model(s). [Details on car-following mode
 To select a car following model the following syntax should be used:
 
 ```xml
-<vType id="idmAlternative" length="5" minGap="2" carFollowModel="IDM" tau="1.0" .../>
+<vType id="idmAlternative" length="5" minGap="2" tau="1.0" .../>
 ```
 
 ### Default *Krauss* Model Description

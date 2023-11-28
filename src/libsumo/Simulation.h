@@ -160,6 +160,7 @@ public:
     static void setParameter(const std::string& objectID, const std::string& param, const std::string& value);
 
     static void setScale(double value);
+    static void setStaticInfo(const std::string& key, const std::string& value);
     static void clearPending(const std::string& routeID = "");
     static void saveState(const std::string& fileName);
     /// @brief quick-load simulation state from file and return the state time
