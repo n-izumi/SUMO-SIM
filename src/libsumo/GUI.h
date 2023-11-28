@@ -68,7 +68,7 @@ public:
     static void toggleSelection(const std::string& objID, const std::string& objType = "vehicle");
     static void addView(const std::string& viewID, const std::string& schemeName = "", bool in3D = false);
     static void removeView(const std::string& viewID);
-    static void setStaticInfo(const std::string& key, const std::string& value);
+    static int setStaticInfo(const std::string& key, const std::string& value);
 
     LIBSUMO_ID_PARAMETER_API
     LIBSUMO_SUBSCRIPTION_API

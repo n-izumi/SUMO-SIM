@@ -159,6 +159,14 @@ GUI::getTrackedVehicle(const std::string& viewID) {
     return Dom::getString(libsumo::VAR_TRACK_VEHICLE, viewID);
 }
 
+int
+GUI::setStaticInfo(const std::string& key, const std::string& value) {
+    tcpip::Storage content;
+    content.writeByte(libsumo::TYPE_STRING);
+    content.writeString(value);
+    return Dom::getInt(libsumo::VAR_SET_STATIC_INFO, key, &content);
+}
+
 
 void
 GUI::track(const std::string& objID, const std::string& viewID) {

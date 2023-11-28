@@ -771,6 +771,7 @@ GUIApplicationWindow::buildToolBars() {
         // scenario
         std::string scenarioStr = "シナリオ: " + OptionsCont::getOptions().getString("scenario-name");
         myToolBarDrag8 = new FXToolBarShell(this, GUIDesignToolBar);
+        myToolBarDrag8->setHiliteColor(MFXUtils::getFXColor(RGBColor::RED));
         myToolBar8 = new FXToolBar(myTopDock, myToolBarDrag8, GUIDesignStaticInformationextTop);
         new FXToolBarGrip(myToolBar8, myToolBar8, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
         new FXLabel(myToolBar8, TL(scenarioStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
@@ -829,16 +830,47 @@ GUIApplicationWindow::buildToolBars() {
         new FXLabel(myToolBar18, TL(regulationTrafficStr.c_str()), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
 
         // passing each ather time
+        // myToolBarDrag19 = new FXToolBarShell(this, GUIDesignToolBar);
+        // myToolBar19 = new FXToolBar(myTopDock, myToolBarDrag19, GUIDesignToolBarRaisedSameTop);
+        // new FXToolBarGrip(myToolBar19, myToolBar19, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        // new FXLabel(myToolBar19, TL("タイムアウト発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+
         myToolBarDrag19 = new FXToolBarShell(this, GUIDesignToolBar);
-        myToolBar19 = new FXToolBar(myTopDock, myToolBarDrag19, GUIDesignToolBarRaisedSameTop);
+        myToolBar19 = new FXToolBar(myTopDock, myToolBarDrag19, GUIDesignStaticInformationextTop);
         new FXToolBarGrip(myToolBar19, myToolBar19, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar19, TL("すれ違い発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        new MFXButtonTooltip(myToolBar19, myStaticTooltipMenu, TL("タイムアウト発生時刻:\tToggle between time formats\tToggle between seconds and hour:minute:seconds display."), nullptr, this, MID_TIME_TOGGLE, LAYOUT_TOP | LAYOUT_LEFT);
+
+        myTOTLabel = new MFXLCDLabel(myToolBar19, myStaticTooltipMenu, 16, nullptr, 0, JUSTIFY_RIGHT);
+        myTOTLabel->setHorizontal(2);
+        myTOTLabel->setVertical(6);
+        myTOTLabel->setThickness(2);
+        myTOTLabel->setGroove(2);
+        // myTOTLabel->setText("----------------");
+        // myTOTLabel->setText("11/14 12:00:00");
+        myTOTLabel->setText("----------------");
+        myTOTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::BLACK));
+        myTOTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::WHITE));
 
         // collision time
+        // myToolBarDrag20 = new FXToolBarShell(this, GUIDesignToolBar);
+        // myToolBar20 = new FXToolBar(myTopDock, myToolBarDrag20, GUIDesignToolBarRaisedSameTop);
+        // new FXToolBarGrip(myToolBar20, myToolBar20, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
+        // new FXLabel(myToolBar20, TL("衝突発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
         myToolBarDrag20 = new FXToolBarShell(this, GUIDesignToolBar);
         myToolBar20 = new FXToolBar(myTopDock, myToolBarDrag20, GUIDesignToolBarRaisedSameTop);
         new FXToolBarGrip(myToolBar20, myToolBar20, FXToolBar::ID_TOOLBARGRIP, GUIDesignToolBarGrip);
-        new FXLabel(myToolBar20, TL("衝突発生時刻:------"), nullptr, LAYOUT_TOP | LAYOUT_LEFT);
+        new MFXButtonTooltip(myToolBar20, myStaticTooltipMenu, TL("衝突発生時刻:\tToggle between time formats\tToggle between seconds and hour:minute:seconds display."), nullptr, this, MID_TIME_TOGGLE, LAYOUT_TOP | LAYOUT_LEFT);
+
+        myCTLabel = new MFXLCDLabel(myToolBar20, myStaticTooltipMenu, 16, nullptr, 0, JUSTIFY_RIGHT);
+        myCTLabel->setHorizontal(2);
+        myCTLabel->setVertical(6);
+        myCTLabel->setThickness(2);
+        myCTLabel->setGroove(2);
+        // myCTLabel->setText("11 14 12-00-00");
+        // myCTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::RED));
+        myCTLabel->setText("----------------");
+        myCTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::WHITE));
+        myCTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::BLACK));
     }
     /// game specific stuff
     {
@@ -1681,6 +1713,7 @@ GUIApplicationWindow::onCmdGaming(FXObject*, FXSelector, void*) {
         myToolBar20->show();
         myMessageWindow->show();
         myLCDLabel->setFgColor(MFXUtils::getFXColor(RGBColor::GREEN));
+        myCTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::GREEN));
     }
     if (myMDIClient->numChildren() > 0) {
         GUISUMOViewParent* w = dynamic_cast<GUISUMOViewParent*>(myMDIClient->getActiveChild());
@@ -2554,13 +2587,21 @@ GUIApplicationWindow::setStaticInfo(const std::string& key, const std::string& v
     else if (key == "regulationVolume") {
         regulationVolume = value;
     }
-    // すれ違い
-    else if (key == "passingEachAtherTime") {
+    // タイムアウト
+    else if (key == "timeOutTime") {
         passingEachAtherTime = value;
+        std::string timeStr = myRunThread->getNet().getCurrentTimeStr();
+        myTOTLabel->setText(timeStr.c_str());
+        myTOTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::RED));
+        // myTOTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::RED));
     }
     // 衝突
     else if (key == "collisionTime") {
         collisionTime = value;
+        std::string timeStr = myRunThread->getNet().getCurrentTimeStr();
+        myCTLabel->setText(timeStr.c_str());
+        myCTLabel->setBgColor(MFXUtils::getFXColor(RGBColor::RED));
+        // myCTLabel->setFgColor(MFXUtils::getFXColor(RGBColor::RED));
     }
 }  // NOSONAR
 

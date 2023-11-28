@@ -3164,6 +3164,10 @@ class gui(_object):
     else:
         removeView = _libtraci.gui_removeView
     if _newclass:
+        setStaticInfo = staticmethod(_libtraci.gui_setStaticInfo)
+    else:
+        setStaticInfo = _libtraci.gui_setStaticInfo
+    if _newclass:
         getIDList = staticmethod(_libtraci.gui_getIDList)
     else:
         getIDList = _libtraci.gui_getIDList
@@ -3299,6 +3303,10 @@ gui_addView = _libtraci.gui_addView
 def gui_removeView(viewID):
     return _libtraci.gui_removeView(viewID)
 gui_removeView = _libtraci.gui_removeView
+
+def gui_setStaticInfo(key, value):
+    return _libtraci.gui_setStaticInfo(key, value)
+gui_setStaticInfo = _libtraci.gui_setStaticInfo
 
 def gui_getIDList():
     return _libtraci.gui_getIDList()
@@ -5607,6 +5615,10 @@ class simulation(_object):
     else:
         setScale = _libtraci.simulation_setScale
     if _newclass:
+        setStaticInfo = staticmethod(_libtraci.simulation_setStaticInfo)
+    else:
+        setStaticInfo = _libtraci.simulation_setStaticInfo
+    if _newclass:
         clearPending = staticmethod(_libtraci.simulation_clearPending)
     else:
         clearPending = _libtraci.simulation_clearPending
@@ -5918,6 +5930,10 @@ simulation_setParameter = _libtraci.simulation_setParameter
 def simulation_setScale(value):
     return _libtraci.simulation_setScale(value)
 simulation_setScale = _libtraci.simulation_setScale
+
+def simulation_setStaticInfo(key, value):
+    return _libtraci.simulation_setStaticInfo(key, value)
+simulation_setStaticInfo = _libtraci.simulation_setStaticInfo
 
 def simulation_clearPending(*args, **kwargs):
     return _libtraci.simulation_clearPending(*args, **kwargs)
@@ -6690,6 +6706,7 @@ VAR_SELECT = cvar.VAR_SELECT
 VAR_SCREENSHOT = cvar.VAR_SCREENSHOT
 VAR_TRACK_VEHICLE = cvar.VAR_TRACK_VEHICLE
 VAR_HAS_VIEW = cvar.VAR_HAS_VIEW
+VAR_SET_STATIC_INFO = cvar.VAR_SET_STATIC_INFO
 
 def trafficlight_getRedYellowGreenState(tlsID):
     return _libtraci.trafficlight_getRedYellowGreenState(tlsID)

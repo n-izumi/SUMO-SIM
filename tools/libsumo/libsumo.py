@@ -3163,6 +3163,10 @@ class gui(_object):
     else:
         removeView = _libsumo.gui_removeView
     if _newclass:
+        setStaticInfo = staticmethod(_libsumo.gui_setStaticInfo)
+    else:
+        setStaticInfo = _libsumo.gui_setStaticInfo
+    if _newclass:
         getIDList = staticmethod(_libsumo.gui_getIDList)
     else:
         getIDList = _libsumo.gui_getIDList
@@ -3298,6 +3302,10 @@ gui_addView = _libsumo.gui_addView
 def gui_removeView(viewID):
     return _libsumo.gui_removeView(viewID)
 gui_removeView = _libsumo.gui_removeView
+
+def gui_setStaticInfo(key, value):
+    return _libsumo.gui_setStaticInfo(key, value)
+gui_setStaticInfo = _libsumo.gui_setStaticInfo
 
 def gui_getIDList():
     return _libsumo.gui_getIDList()
@@ -5586,6 +5594,10 @@ class simulation(_object):
     else:
         setScale = _libsumo.simulation_setScale
     if _newclass:
+        setStaticInfo = staticmethod(_libsumo.simulation_setStaticInfo)
+    else:
+        setStaticInfo = _libsumo.simulation_setStaticInfo
+    if _newclass:
         clearPending = staticmethod(_libsumo.simulation_clearPending)
     else:
         clearPending = _libsumo.simulation_clearPending
@@ -5877,6 +5889,10 @@ simulation_setParameter = _libsumo.simulation_setParameter
 def simulation_setScale(value):
     return _libsumo.simulation_setScale(value)
 simulation_setScale = _libsumo.simulation_setScale
+
+def simulation_setStaticInfo(key, value):
+    return _libsumo.simulation_setStaticInfo(key, value)
+simulation_setStaticInfo = _libsumo.simulation_setStaticInfo
 
 def simulation_clearPending(*args, **kwargs):
     return _libsumo.simulation_clearPending(*args, **kwargs)
@@ -6649,6 +6665,7 @@ VAR_SELECT = cvar.VAR_SELECT
 VAR_SCREENSHOT = cvar.VAR_SCREENSHOT
 VAR_TRACK_VEHICLE = cvar.VAR_TRACK_VEHICLE
 VAR_HAS_VIEW = cvar.VAR_HAS_VIEW
+VAR_SET_STATIC_INFO = cvar.VAR_SET_STATIC_INFO
 
 def trafficlight_getRedYellowGreenState(tlsID):
     return _libsumo.trafficlight_getRedYellowGreenState(tlsID)

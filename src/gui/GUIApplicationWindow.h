@@ -489,6 +489,12 @@ protected:
     /// @brief the simulation step display
     MFXLCDLabel* myCTSLabel = nullptr;
 
+    /// @brief the simulation step display
+    MFXLCDLabel* myCTLabel = nullptr;
+
+    /// @brief the simulation step display
+    MFXLCDLabel* myTOTLabel = nullptr;
+
     /// @brief io-event with the load-thread
     FXEX::MFXThreadEvent myLoadThreadEvent;
 
