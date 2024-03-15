@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -std=c++11 -pthread -Wall -pedantic -Wextra -O3 -DNDEBUG  -shared -Wl,-soname,libsumofmi2.so -o ../../bin/libsumofmi2.so CMakeFiles/libsumofmi2.dir/fmi2Functions.c.o CMakeFiles/libsumofmi2.dir/sumo2fmi_bridge.c.o CMakeFiles/libsumofmi2.dir/libsumocpp2c.cpp.o -Wl,-rpath,/home/traffic/SUMO-SIM/bin ../../bin/libsumocpp.so 
